@@ -26,19 +26,19 @@ public class Main {
      */
     private static long getFibonacciSumFast(long n){
         // create 1D array
-        long[] array = new long[(int)n + 1];
-        // initialize the first 2 terms of the sequence
-        array[0] = 0;
-        array[1] = 1;
-        long sum = 1; // to calculate the sum - sum is 1 currently because 0 + 1 = 1
-        /* iterate through all the terms and find the current term
-           by adding the value of the 2 previous terms
-         */
-        for(int i = 2; i < array.length; i++){
-            array[i] = array[i - 2] + array[i - 1];
-            sum += array[i];
+        if (n <= 1) {
+            return n;
+        } else {
+            long[] array = new long[(int)n + 1];
+            array[0] = 0L;
+            array[1] = 1L;
+            long sum = 1L; // to calculate the sum - sum is 1 currently because 0 + 1 = 1
+            for(int i = 2; i < array.length; ++i) {
+                array[i] = array[i - 2] + array[i - 1];
+                sum += array[i];
+            }
+            return sum % 10;
         }
-        return sum % 10;
     }
 
     public static void main(String[] args) {
