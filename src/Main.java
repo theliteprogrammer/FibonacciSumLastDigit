@@ -1,5 +1,50 @@
+import java.util.Scanner;
+
 public class Main {
+    private static long getFibonacciSumNaive(long n) {
+        if (n <= 1)
+            return n;
+
+        long previous = 0;
+        long current  = 1;
+        long sum      = 1;
+
+        for (long i = 0; i < n - 1; ++i) {
+            long tmp_previous = previous;
+            previous = current;
+            current = tmp_previous + current;
+            sum += current;
+        }
+
+        return sum % 10;
+    }
+
+    /**
+     *
+     * @param n - The nth term of a fibonacci sequence
+     * @return The remainder of the sum of all numbers in fibonacci sequence divided by 10
+     */
+    private static long getFibonacciSumFast(long n){
+        // create 1D array
+        long[] array = new long[(int)n + 1];
+        // initialize the first 2 terms of the sequence
+        array[0] = 0;
+        array[1] = 1;
+        long sum = 1; // to calculate the sum - sum is 1 currently because 0 + 1 = 1
+        /* iterate through all the terms and find the current term
+           by adding the value of the 2 previous terms
+         */
+        for(int i = 2; i < array.length; i++){
+            array[i] = array[i - 2] + array[i - 1];
+            sum += array[i];
+        }
+        return sum % 10;
+    }
+
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Scanner scanner = new Scanner(System.in);
+        long n = scanner.nextLong();
+        long s = getFibonacciSumFast(n);
+        System.out.println(s);
     }
 }
