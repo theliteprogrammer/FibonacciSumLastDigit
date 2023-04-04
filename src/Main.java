@@ -25,27 +25,26 @@ public class Main {
      * @param n - The nth term of a fibonacci sequence
      * @return The remainder of the sum of all numbers in fibonacci sequence divided by 10
      */
-    private static BigInteger getFibonacciSumFast(long n){
+    private static long getFibonacciSumFast(long n){
         // create 1D array
         if (n <= 1) {
-            return BigInteger.valueOf(n);
-        } else {
-            BigInteger[] array = new BigInteger[(int)n + 1];
-            array[0] = BigInteger.valueOf(0);
-            array[1] = BigInteger.valueOf(1);
-            BigInteger sum = BigInteger.valueOf(1); // to calculate the sum - sum is 1 currently because 0 + 1 = 1
-            for(int i = 2; i < array.length; ++i) {
-                array[i] = array[i - 2].add(array[i - 1]);
-                sum = sum.add(array[i]);
-            }
-            return sum.mod(BigInteger.valueOf(10));
+            return n;
         }
+        long[] array = new long[(int)n + 1];
+        array[0] = 0L;
+        array[1] = 1L;
+        long sum = 1; // to calculate the sum - sum is 1 currently because 0 + 1 = 1
+        for(int i = 2; i < array.length; i++) {
+            array[i] = array[i - 2] + array[i - 1];
+            sum += array[i];
+        }
+        return sum % 10L;
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         long n = scanner.nextLong();
-        BigInteger s = getFibonacciSumFast(n);
+        long s = getFibonacciSumFast(n);
         System.out.println(s);
     }
 }
